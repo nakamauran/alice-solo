@@ -1,0 +1,23 @@
+# 改行コードの扱いを明示する。
+# リポジトリには LF で入れ、Windows の作業コピーでは CRLF に展開する。
+# これを書いておかないと、機械をまたいだときに差分が改行だけで荒れる。
+* text=auto
+
+*.py    text diff=python
+*.md    text
+*.yaml  text
+*.yml   text
+*.txt   text
+*.iss   text
+*.spec  text
+
+# バイナリ。差分も改行変換もしない
+*.png   binary
+*.ico   binary
+*.jpg   binary
+*.zip   binary
+*.db    binary
+
+# GitHub の言語判定から、資料とテストを除く
+docs/**     linguist-documentation
+tests/**    linguist-vendored

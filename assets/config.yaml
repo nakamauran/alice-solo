@@ -1,0 +1,41 @@
+# Alice Solo 同梱既定値。実行時に書き換えないこと。
+# ユーザ設定は %APPDATA%/Alice/user_config.json に保存して上書きする。
+
+app:
+  data_dir_name: "Alice"
+  day_start_hour: 5
+
+character:
+  default_pack: "koyuki"
+
+weather:
+  provider: "open-meteo"
+  endpoint: "https://api.open-meteo.com/v1/forecast"
+  timeout_sec: 3
+  default_location:
+    label: "東京都"
+    latitude: 35.6895
+    longitude: 139.6917
+  timezone: "Asia/Tokyo"
+
+news:
+  hour: 9
+  max_items: 10
+  timeout_sec: 5
+  feeds:
+    - { label: "NHK 主要", url: "https://www.nhk.or.jp/rss/news/cat0.xml" }
+    - { label: "NHK 科学", url: "https://www.nhk.or.jp/rss/news/cat3.xml" }
+
+monitor:
+  interval_ms: 300000
+  thresholds:
+    cpu_warn: 85
+    mem_warn: 85
+    disk_warn: 90
+
+media:
+  enabled: true
+
+inbox:
+  retention_days: 30
+  purge_hour: 10

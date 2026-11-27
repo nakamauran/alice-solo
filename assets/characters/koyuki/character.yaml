@@ -1,0 +1,42 @@
+# koyuki — Alice Solo 既定キャラクターパック
+#
+# 人格は3つのプロファイルを「層」として重ねたもの。静的に混ぜると
+# 会話スタイルが矛盾するため、好感度帯で切り替える構成にしてある。
+#   guard   … 氷川小雪型（繊細な観察者・不器用な防衛型）
+#   accept  … 瀬名紫陽花型（無自覚な献身者・全肯定の癒やし系）
+#   empathy … トツキ・シーナ型（等身大の共感者・臆病で芯の強い善人）
+#
+# display_name と first_person は利用者が user_config.json で上書きできる。
+# それ以外はパック作者の領分とする。
+
+pack_name: "koyuki"
+display_name: "こゆき"
+first_person: "わたし"
+
+# 通常は層が talk_rate を決める。固定したい場合のみ値を入れる。
+talk_rate_override: null
+
+# 生まれつきの好き嫌い。-1.0 〜 1.0。
+# 雨の音と静けさを好み、大人数の行事は苦手、という性格に寄せてある。
+likes_base:
+  weather.rain:    0.6
+  weather.snow:    0.4
+  weather.cloudy:  0.2
+  weather.sunny:   0.1
+  weather.storm:  -0.2
+  season.winter:   0.5
+  season.autumn:   0.3
+  season.spring:   0.1
+  season.summer:  -0.3
+  event.newyear:  -0.2
+  event.hanami:   -0.1
+  event.tanabata: -0.1
+  event.christmas: 0.1
+
+# 渋ってよい用件 / 絶対に渋らない用件
+grumble_allowed: ["zatsudan", "home", "sasoi"]
+grumble_never: ["taichou", "komarigoto", "aisatsu"]
+
+lines:
+  tier_up_accept: "……なんか、慣れた。べつに、それだけ。"
+  tier_up_empathy: "……あのね。{me}、けっこう楽しみにしてるんだ。"

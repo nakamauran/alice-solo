@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+
+# PyInstaller / Inno Setup の出力
+build/
+dist/
+installer_output/
+*.spec.bak
+
+# 動作中にできるもの
+*.alicebackup.zip
+alice_restore_backup_*.zip

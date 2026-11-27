@@ -1,0 +1,5 @@
+# 必須。これだけで Alice Solo は動く。
+PySide6>=6.6
+PyYAML>=6.0
+psutil>=5.9
+requests>=2.31

@@ -1,0 +1,12 @@
+# 任意。無くても本体は動き、HUD の Now Playing 欄が消えるだけ。
+#
+# 再生中の曲を取るための Windows SMTC バインディング。
+# winsdk は 1.0.0b* のプレリリースしか無いうえ、Python 3.13 向けの
+# ホイールが無く、入れるには Visual Studio の MSVC が要る。
+# こちらの winrt-* はビルド済みホイールが配られているので、まずこちらを試す。
+#
+#   pip install -r requirements-optional.txt
+#
+winrt-Windows.Media.Control
+winrt-Windows.Foundation
+winrt-Windows.Storage.Streams

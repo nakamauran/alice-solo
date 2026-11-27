@@ -1,0 +1,53 @@
+# koyuki スキン定義（Alice Solo 暫定キャラクター）
+#
+# 素材元: assets/*.jpg（896x1200・グリーンバック）
+# 変換:   フチからのフラッドフィルで背景を判定し、アルファは二値。
+#         JPEG由来の緑かぶりは despill で除去済み（残差は最大 8/255）。
+#         7枚すべてを同一の和バウンディングボックス（166,60）-（730,1170）で
+#         クロップしてあるため、感情を切り替えてもキャラの位置はずれない。
+# キャンバス: 564 x 1110（全差分で共通）
+#
+# 【重要】背丈の正規化について
+# content_scale() を差分ごとに計算してはいけない。ポーズによって中身の高さが
+# 変わる（normal 1044 / joy 1070 / sad 1110 / sleepy 972 / thinking 990）ため、
+# 差分ごとに正規化すると感情が変わるたびにキャラが伸縮する。
+# **base（normal）の中身高さ 1044 をパック全体の基準とし、全差分に同じ倍率を
+# 適用すること。**
+
+canvas: { width: 564, height: 1110 }
+
+# base の中身の高さ。sprite_compositor はこの値だけを使って
+# REFERENCE_CONTENT_HEIGHT との比を取る。
+base_content_height: 1044
+
+base:
+  file: "normal.png"
+
+# 差分は顔パーツのみではなく全身1枚のため face_overlay は使わない。
+# 顔だけの差分素材を用意できた場合はここに戻す。
+face_overlay: {}
+
+# 丸ごと1枚に差し替える特殊ポーズ。
+# 未登録のキーが来た場合は base にフォールバックすること。
+special_pose:
+  happy_strong: { file: "joy.png" }
+  sad:          { file: "sad.png" }
+  shy:          { file: "shy.png" }
+  anxious:      { file: "thinking.png" }   # 不安・考え込み
+  drowsy:       { file: "sleepy.png" }     # 軽い眠気
+  sleepy:       { file: "sleepy.png" }     # 熟睡（深夜・長時間放置）
+
+  # 以下は意図的に未登録（base にフォールバックする）
+  # happy_weak: 出現頻度が高く joy では大げさなため normal を使う
+  # angry:      表に出さない人格設定のため素材を作らない
+  # neutral:    base そのもの
+
+# ニュートラル感情かつ発話中のみ差し替える全身画像。
+talking_pose:
+  file: "speak.png"
+
+# 感情カテゴリ以外の状態表示。
+status_pose:
+  thinking: { file: "thinking.png" }       # 応答生成中・外部取得待ち
+
+# feed_items は Alice Solo では未使用（餌やり廃止）。
