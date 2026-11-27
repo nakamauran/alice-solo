@@ -2,7 +2,7 @@
 
 - 発言に時刻を付ける
 - Enter で送信、Shift+Enter で改行
-- 自分の発言は右寄せ・薄い背景、こゆきは左寄せ・白背景
+- 発言はすべて左寄せ。自分の発言は薄い背景、こゆきは白背景で区別する
 - 当日分の履歴を復元する（保存は main.py が local_store へ行う）
 """
 from __future__ import annotations
@@ -89,7 +89,8 @@ class ChatWindow(QWidget):
             cursor.insertBlock()
 
         block = QTextBlockFormat()
-        block.setAlignment(Qt.AlignRight if mine else Qt.AlignLeft)
+        # 時刻の位置をそろえるため、自分の発言も左寄せにする。
+        block.setAlignment(Qt.AlignLeft)
         block.setBackground(QColor(bg))
         block.setTopMargin(2)
         block.setBottomMargin(2)

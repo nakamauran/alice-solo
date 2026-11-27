@@ -7,7 +7,7 @@
 ; ここへ書き写す。手で直さないこと（§10 の一元管理）。
 
 #define AppName      "Alice Solo"
-#define AppVersion   "1.0.0"
+#define AppVersion   "1.0.1"
 #define AppPublisher "nakamauran"
 #define AppExeName   "AliceSolo.exe"
 #define AppURL       "https://github.com/nakamauran/alice-solo"
