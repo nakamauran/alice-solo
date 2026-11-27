@@ -30,9 +30,28 @@ UninstallDisplayIcon={app}\{#AppExeName}
 Compression=lzma2/max
 SolidCompression=yes
 WizardStyle=modern
-; 管理者権限を求めない。Program Files に入れない選択もできるようにする
-PrivilegesRequiredOverridesAllowed=dialog
+; 既定はユーザー単位のインストール。管理者権限を求めない。
+;
+; lowest にしないと既定が admin になり、{autopf} が Program Files、
+; {userstartup} が「管理者アカウントの」スタートアップを指す。すると
+; 自動起動のショートカットを作った本人と消す相手が食い違い、
+; アンインストールで消し残す（ISCC も警告を出す）。
+;
+; PrivilegesRequiredOverridesAllowed は付けない。付けると「管理者モードで
+; 走りうる」とみなされ、ISCC の UsedUserAreasWarning が消えない。
+; このアプリは保存先も %APPDATA% でユーザー単位に閉じているので、
+; 管理者インストールを許す意味がない。
+PrivilegesRequired=lowest
 ArchitecturesInstallIn64BitMode=x64compatible
+
+; 起動したままインストール／アンインストールされることが多い。
+; Restart Manager に掴んでいるプロセスを閉じさせる。
+; 閉じたあと勝手に起こし直さない（常駐アプリなので利用者に任せる）。
+CloseApplications=yes
+CloseApplicationsFilter=*.exe,*.dll
+RestartApplications=no
+; 二重起動の防止
+SetupMutex=AliceSoloSetupMutex
 
 [Languages]
 Name: "japanese"; MessagesFile: "compiler:Languages\Japanese.isl"
@@ -60,8 +79,12 @@ Filename: "{app}\{#AppExeName}"; \
     Flags: nowait postinstall skipifsilent
 
 [UninstallDelete]
-; 自動起動のショートカットは設定で作られるもの。消し残さない
+; 自動起動のショートカットは設定画面が作るもの。インストーラは知らないので
+; ここで明示的に消す。
 Type: files; Name: "{userstartup}\Alice Solo.lnk"
+; PyInstaller の出力に加え、実行中にできた一時ファイルが残ることがある。
+; フォルダごと片付ける。
+Type: filesandordirs; Name: "{app}"
 
 [Code]
 // アンインストール時に、保存データを消すか尋ねる。
